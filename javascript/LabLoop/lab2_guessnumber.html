@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let number = Math.floor(Math.random() * 99) + 1;
+        let guess;
+        let count = 0;
+
+        alert("ผู้เล่นคนแรก กรุณาเลือกเลขที่อยู่ระหว่าง 1-99 โดยไม่ให้ผู้เล่นคนที่สองรู้ว่าคือเลขอะไร");
+
+        do {
+            guess = prompt("ผู้เล่นคนที่สอง กรุณาเดาเลขที่ผู้เล่นคนแรกเลือกไว้");
+            if (guess === null) {
+                break;
+            }
+            guess = Number(guess);
+            if (isNaN(guess) || guess < 1 || guess > 99) {
+                alert("กรุณากรอกเลขระหว่าง 1-99 เท่านั้น");
+                continue;
+            }
+            count++;
+            if (guess === number) {
+                alert(`ยินดีด้วย! คุณทายตัวเลข ${number} ถูกต้องแล้ว จำนวนครั้งที่ทาย: ${count}`);
+            } else if (guess < number) {
+                alert(`เลขที่คุณทาย (${guess}) น้อยกว่าเลขที่ผู้เล่นคนแรกเลือกไว้`);
+            } else {
+                alert(`เลขที่คุณทาย (${guess}) มากกว่าเลขที่ผู้เล่นคนแรกเลือกไว้`);
+            }
+        } while (guess !== null && guess !== number);
+    </script>
+</body>
+
+</html>
