@@ -1,0 +1,112 @@
+//Lab 11
+let [first, second, third] = ['Maya', 'Marisa', 'Chi'];
+console.log(first); // *
+console.log(second); // **
+console.log(third); // ***
+// ตอบ 
+// VM40:2 Maya      first จาก array ที่ index 0 
+// VM40:3 Marisa    second  จาก array ที่ index 1 
+// VM40:4 Chi       third  จาก array ที่ index 2 
+-----------------------------------------------------------------
+//Lab 12
+let [raindrops, whiskers, ...aFewOfMyFavoriteThings] = [
+    'Raindrops on roses',
+    'whiskers on kittens',
+    'Bright copper kettles',
+    'warm woolen mittens',
+   ];
+   console.log(raindrops); // *                 raindrops: คือตัวแปรที่รับค่าจาก index ที่ 0 ของ array
+   console.log(whiskers); // **                 whiskers: คือตัวแปรที่รับค่าจาก index ที่ 1 ของ array 
+   console.log(aFewOfMyFavoriteThings); // ***  aFewOfMyFavoriteThings: คือตัวแปรที่รับค่าจาก index ที่ 2 เป็นต้นไปของ array 
+// ตอบ 
+   // VM44:7 Raindrops on roses
+// VM44:8 whiskers on kittens
+// VM44:9 (2) ['Bright copper kettles', 'warm woolen mittens']
+--------------------------------------------------------------------------------------------------------------------------
+//Lab 13
+let numbers = [10, 20, 30];
+[numbers[1], numbers[2]] = [numbers[2], numbers[1]];
+console.log(numbers); // *  การนำค่าจาก array ที่ 2 มาใส่ใน array แรก ทำให้ค่าของ elements ที่ index 1 และ 2 ถูกสลับกัน
+// ตอบ 
+// VM48:3 (3) [10, 30, 20]
+---------------------------------------------------------------
+//Lab 14
+let facts = { numPlanets: 8, yearNeptuneDiscovered: 1846 };
+let { numPlanets, yearNeptuneDiscovered } = facts;
+console.log(numPlanets); // *
+console.log(yearNeptuneDiscovered); // **
+// ตอบ 
+// VM52:3 8      numPlanets รับค่าจาก property numPlanets
+// VM52:4 1846   yearNeptuneDiscovered รับค่าจาก property yearNeptuneDiscovered
+----------------------------------------------------------------
+//Lab 15
+let planetFacts = {
+    numPlanets: 8,
+    yearNeptuneDiscovered: 1846,
+    yearMarsDiscovered: 1659
+   };
+   let { numPlanets, ...discoveryYears } = planetFacts;
+   console.log(discoveryYears); // *
+// ตอบ 
+//    VM56:7 {yearNeptuneDiscovered: 1846, yearMarsDiscovered: 1659}
+//  discoveryYears รับค่าทั้งหมดที่ไม่ได้ถูกระบุใน destructuring และถูกเก็บใน object ใหม่
+-----------------------------------------------------------------
+//Lab 16
+function getUserData({ firstName, favoriteColor = 'green' }) {
+    return `Your name is ${firstName} and you like ${favoriteColor}`;
+   }
+   getUserData({ firstName: 'Alejandro', favoriteColor: 'purple' }); // *
+   getUserData({ firstName: 'Melissa' }); // **
+   getUserData({}); // ***
+// ตอบ 
+//    'Your name is undefined and you like green'
+// getUserData({ firstName: 'Alejandro', favoriteColor: 'purple' }); getUserData โดยส่ง object ที่มี property firstName และ favoriteColor ซึ่งได้ผลลัพธ์เป็น "Your name is Alejandro and you like purple"
+// getUserData({ firstName: 'Melissa' }); โดยส่ง object ที่มีเฉพาะ property firstName โดยที่ไม่ได้ระบุ favoriteColor ซึ่งได้ผลลัพธ์เป็น "Your name is Melissa and you like green"
+// getUserData({}); โดยส่ง object ที่ไม่มีค่าใดๆ ซึ่งได้ผลลัพธ์เป็น "Your name is undefined and you like green"
+----------------------------------------------------------------
+//Lab 19
+let user = {
+    name: 'John',
+    years: 27
+  };
+  let { name, years: age, isAdmin = false } = user;
+  console.log(name); // 'John'
+  console.log(age); // 27
+  console.log(isAdmin); // false
+//   VM68:9 John
+//   VM68:10 27
+//   VM68:11 false
+-----------------------------------------------------------------
+//Lab 21
+let arr = [1, [2, [[[3, 4], 5], 6]]];
+let [a, [b, [[, c], d]], e, f] = arr;
+console.log(a); // 1
+console.log(b); // 2
+console.log(c); // 3
+console.log(d); // 4
+console.log(e); // 5
+console.log(f); // 6
+// VM79:6 1
+// VM79:7 2
+// VM79:8 5
+// VM79:9 6
+// VM79:10 undefined
+// VM79:11 undefined
+-----------------------------------------------------------------
+//Lab 24
+const [, , , a, b] = [1, 2, 3];
+// a: เป็นตัวแปรที่เก็บค่าจาก  ที่ 3 ของ array ซึ่งเป็น undefined เพราะไม่มีค่าใน ที่ 3.
+//b: เป็นตัวแปรที่เก็บค่าจาก ที่ 4 ของ array ซึ่งเป็น undefined เพราะไม่มีค่าใน ที่ 4.
+// ตอบ array 1 กับ array 2   มีสมาชิกไม่เท่ากัน ค่าที่ออกมา จึงเป็น  undefined
+-----------------------------------------------------------
+//Lab 28
+const users = [ { user: "Name1" },{ user: "Name2", age: 2 },{ user: "Name2" },{ user: "Name3", age: 4 }];
+  for (const { user, age = "unknown" } of users) {
+    console.log(`${user} - Age: ${age}`);
+  }
+// ตอบ 
+//   VM91:9 Name1 - Age: unknown
+//   VM91:9 Name2 - Age: 2
+//   VM91:9 Name2 - Age: unknown
+//   VM91:9 Name3 - Age: 4
+--------------------------------------------------
