@@ -4,12 +4,17 @@
     padding: 0;
 }
 
-body{
+html{
     font-size: 20px;
 }
 
 .container {
     background-color: tomato;
-    width: 5in;
-    min-height: 200px;
+    font-size: 20px;
+    width: 10rem;
+    min-height: 5em;
+}
+
+h1 i {
+    color: #992828;
 }
