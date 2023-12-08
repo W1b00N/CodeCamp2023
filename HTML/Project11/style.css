@@ -1,0 +1,29 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: aquamarine;
+}
+
+.container {
+    background-color: blueviolet;
+    width: 400px;
+    height: 200px;
+    /* padding: 10px; */
+    margin: auto;
+    /* border-top-style: solid;
+    border-top-width: 15px;
+    border-top-color: red; */
+    border-top: 15px solid red;
+    margin-top: 100px;
+    padding-block: 10px;
+    padding-inline: 20px;
+    outline: 5px solid gold;
+}
+
+.item {
+    border: 1px dashed red;
+}
