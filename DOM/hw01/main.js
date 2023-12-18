@@ -14,10 +14,6 @@ function updateCounter(n) {
     number.textContent = n
 }
 
-btnInc.addEventListener('click', () => {
-    updateCounter(1)
-})
-
-btnDec.addEventListener('click', () => {
-    updateCounter(-1)
-})
+btnInc.addEventListener('click', () => updateCounter(1))
+btnDec.addEventListener('click', () => updateCounter(-1))
+btnClr.addEventListener('click', () => updateCounter(0))
