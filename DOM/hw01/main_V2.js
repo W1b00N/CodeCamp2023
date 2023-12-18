@@ -1,7 +1,12 @@
 const root = document.querySelector('#root')
 const btnAdd = document.querySelector('.btn-add')
+const sumInfo = document.querySelector('.show-sum')
+
+let Total = 0
 
 function Counter() {
+    let countNum = 0
+
     // *******DOM create element with function ******
     const makeElement = (tag, att_n, att_v, content) => {
         let output = document.createElement(tag)
@@ -10,22 +15,23 @@ function Counter() {
         return output
     }
 
-    let countNum = 0
-
-
+    // render
     // *******function update counter ****
     const updateCounter = (n) => {
         if (countNum + n < 0) {
             return
         }
         countNum += n
+        Total += n
         number.textContent = countNum
+        sumInfo.textContent = `Sum = ${Total}`
     }
 
     const removeCounter = (e) => {
         // root.removeChild(counter)
-        console.log(e.target.closest('.counter'))
         e.target.closest('.counter').remove()
+        updateCounter(-countNum)
+
     }
 
     // DOM make element
