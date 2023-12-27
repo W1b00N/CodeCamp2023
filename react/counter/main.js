@@ -1,44 +1,16 @@
-const root = ReactDOM.createRoot(document.getElementById('root'))
-root.render(<App />)
-
-// function Counter(props) {
-//   const {item : {id, number}, hdlUpdate} = props
-function Counter({ item: { id, number }, hdlUpdate }) {
-
-    return (
-        <div className='counter'>
-            <button onClick={() => hdlUpdate(id, -1)}> - </button>
-            <h3>{number}</h3>
-            <button onClick={() => hdlUpdate(id, 1)}> + </button>
-            <button onClick={() => hdlUpdate(id, -number)}> C </button>
-            <button> X </button>
-        </div>
-        //  <div className='counter'>
-        //     <button onClick = {()=>props.hdlUpdate(props.item.id,-1)}> - </button>
-        //     <h3>{props.item.number}</h3>
-        //     <button onClick = {()=>props.hdlUpdate(props.item.id,1)}> + </button>
-        //     <button onClick = {()=>props.hdlUpdate(props.item.id,-props.item.number)}> C </button>
-        //  </div>
-    )
-}
-
-function SumInfo(props) {
-    const stTitle = {
-        color: props.color,
-        fontSize: props.size === 'big' ? '50px' : '40px'
-    }
-    return (
-        <div className='suminfo'>
-            {/* <h1 style={stTitle}>Sum = 0</h1> */}
-            <h1 style={{ color: props.color, fontSize: '50px' }}>Sum = 0</h1>
-        </div>
-    )
-}
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App />);
 
 function App() {
-
     const [counters, setCounters] = React.useState([{ id: 1, number: 0 }])
-    // let allCounter = Array(counters).fill(<Counter />)
+    let total = counters.reduce((a, el) => a + el.number, 0)
+    console.log(total)
+
+    const hdlAddCounter = () => setCounters([...counters, {
+        id: counters.length === 0 ? 1 : counters.at(-1).id + 1,
+        number: 0
+    }
+    ])
 
     const hdlUpdate = (id, num) => {
         const cloneCounters = [...counters]
@@ -50,26 +22,42 @@ function App() {
         setCounters(cloneCounters)
     }
 
-    // ปุ่ม C ต้องใช้ได้
-    // ตัวเลขต้องไม่ติดลบ
-    const hdlAddCounter = () => {
-        let newId = counters.length === 0 ? 1 : counters.at(-1).id + 1
-        // setCounter([...counters, {id: newId, number : 0}])
+    const hdlDelCounter = (id) => {
         const cloneCounters = [...counters]
-        cloneCounters.push({ id: newId, number: 0 })
+        let idx = cloneCounters.findIndex(el => el.id === id)
+        cloneCounters.splice(idx, 1)
         setCounters(cloneCounters)
     }
-
     return (
         <>
-            <h1 className='text-center'>Codecamp Academy 01</h1>
-            <button className='text-center' onClick={hdlAddCounter}>Add Counter</button>
-            <SumInfo color="red" size="big" />
+            <h1 className="text-center">Codecamp Academy 01</h1>
+            <button className="text-center" onClick={hdlAddCounter}>Add Counter</button>
+            <SumInfo total={total} />
 
-            {counters.map(el => {
-                return <Counter key={el.id} item={el} hdlUpdate={hdlUpdate} />
-            })}
-
+            {counters.map(el => (
+                <Counter key={el.id} item={el} hdlUpdate={hdlUpdate} hdlDelCounter={hdlDelCounter} />
+            ))}
         </>
-    )
+    );
+}
+
+function SumInfo(props) {
+    return (
+        <div className="suminfo">
+            <h1> Sum = {props.total}</h1>
+        </div>
+    );
+}
+
+function Counter(props) {
+
+    return (
+        <div className="counter">
+            <button onClick={() => props.hdlUpdate(props.item.id, -1)}>-</button>
+            <h3>{props.item.number}</h3>
+            <button onClick={() => props.hdlUpdate(props.item.id, 1)}>+</button>
+            <button onClick={() => props.hdlUpdate(props.item.id, -props.item.number)}>C</button>
+            <button onClick={() => props.hdlDelCounter(props.item.id)}>X</button>
+        </div>
+    );
 }
